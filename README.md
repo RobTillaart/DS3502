@@ -269,8 +269,8 @@ Resets after being read.
 
 #### Wont (unless)
 
-- investigate DS3501 derived class?
-- investigate DS3503 derived class?
+- write DS3501 derived class?
+- write DS3503 derived class?
 
 
 ## Support
