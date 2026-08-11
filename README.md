@@ -239,7 +239,7 @@ Resets after being read.
 |   0x02  |  DS3502_REQUEST_ERROR  |
 |   0x03  |  DS3502_CONNECT_ERROR  |
 |   0x04  |  DS3502_VALUE_ERROR    |
-|  other  |  low level I2C         }
+|  other  |  low level I2C         |
 
 
 ## Future
