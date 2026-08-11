@@ -56,7 +56,7 @@ unittest(test_constants)
 unittest(test_constructor)
 {
   DS3502 ds(0x28);
-  assertEqual(0x28, DS.getAddress());
+  assertEqual(0x28, ds.getAddress());
 }
 
 
