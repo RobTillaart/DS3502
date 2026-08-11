@@ -144,7 +144,7 @@ too if they are behind the multiplexer.
 
 ### I2C Performance
 
-Only test **set()** as that is the main function.
+Only test **setValue(value)** as that is the main function.
 
 
 |  Clock     |  time (us)  |  Notes  |
@@ -169,11 +169,13 @@ TODO: run performance sketch on hardware.
 ### Constructor
 
 - **DS3502(uint8_t address, TwoWire \*wire = &Wire)** optional select I2C bus.
+Note the address range is not checked (0x28 .. 0x2B).
 - **bool begin()** checks if device is visible on the I2C bus.
 - **bool isConnected()** Checks if device address can be found on I2C bus.
-- **uint8_t getAddress()** Returns the fixed address 0x2A (42).
+- **uint8_t getAddress()** Returns the address set in the constructor.
 
-### Mode
+
+### Non volatile RAM
 
 - **bool enableNVRAM(bool nvram)** The next value written
 with setValue() will be written to non volatile RAM too.
@@ -196,7 +198,7 @@ NVRAM once if the flag is explicitly set.
 
 Cache can be used to speed up device interaction as the last value written
 is cached by the library.
-It prevents unneeded writes as the value did not change, and it can return
+It prevents unneeded writes when the value did not change, and it can return
 the last value written from cache.
 
 - **void enableCache(bool cache)** default false;
@@ -220,12 +222,24 @@ Based on DS3502_MAX_OHM, default max 10 kΩ.
 With 127 steps that implies about 78.74 Ω per step.
 
 - **bool setOhm(uint16_t ohm)** sets the value in ohms, exact value is truncated.
-- **uint16_t getOhm()**
+Returns false if out of range.
+- **uint16_t getOhm()** calculate the last Ohm value from the actual set value.
+Note this will differ from the set value often due to step size.
 
 
 ### Debug
 
-- **uint8_t getLastError()** returns last error of low level communication.
+- **int getLastError()** returns last error of low level communication.
+Resets after being read.
+
+|  value  |  define                |  notes  |
+|:-------:|:-----------------------|:--------|
+|   0x00  |  DS3502_OK             |
+|   0x01  |  DS3502_READ_ERROR     |
+|   0x02  |  DS3502_REQUEST_ERROR  |
+|   0x03  |  DS3502_CONNECT_ERROR  |
+|   0x04  |  DS3502_VALUE_ERROR    |
+|  other  |  low level I2C         }
 
 
 ## Future

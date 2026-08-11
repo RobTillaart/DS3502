@@ -40,13 +40,23 @@ unittest_teardown()
 
 unittest(test_constants)
 {
-  assertEqual(1, 1);
+  fprintf(stderr, "Error codes");
+  assertEqual(DS3502_OK           , 0x00);
+  assertEqual(DS3502_READ_ERROR   , 0x01);
+  assertEqual(DS3502_REQUEST_ERROR, 0x02);
+  assertEqual(DS3502_CONNECT_ERROR, 0x03);
+  assertEqual(DS3502_VALUE_ERROR  , 0x04);
+
+  fprintf(stderr, "\nOther");
+  assertEqual(DS3502_MIDDLE_VALUE, 0x40);
+  assertEqual(DS3502_MAX_OHM, 10000);
 }
 
 
 unittest(test_constructor)
 {
-  DS3502 obj;
+  DS3502 ds(0x28);
+  assertEqual(0x28, DS.getAddress());
 }
 
 
