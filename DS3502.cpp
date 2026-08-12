@@ -100,7 +100,7 @@ bool DS3502::setValue(uint8_t value)
   return _error == DS3502_OK;
 }
 
-uint8_t DS3502::getValue()
+int DS3502::getValue()
 {
   //  test value is written
   if (_useCache) return _lastValue;
