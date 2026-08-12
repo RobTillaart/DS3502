@@ -119,7 +119,7 @@ bool DS3502::setOhm(uint16_t ohm)
   return setValue(value);
 }
 
-uint16_t DS3502::getOhm()
+int16_t DS3502::getOhm()
 {
   uint8_t value = getValue();
   if (_error != DS3502_OK)
